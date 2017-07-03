@@ -33,7 +33,7 @@
                     class="form-control"
                     value="{{Request::old('name')}}">
                 </div>
-                <button type="submit" class="btn bt-primary">Submit</button>
+                <button type="submit" class="btn btn-primary">Sing Up</button>
                 <input type="hidden" name="_token" value="{{ Session::token() }}">
             </form>
         </div>
@@ -56,7 +56,7 @@
                 class="form-control"
                 value="{{Request::old('password')}}">
             </div>
-                <button type="submit" class="btn bt-primary">Submit</button>
+                <button type="submit" class="btn btn-primary">Sing In</button>
                 <input type="hidden" name="_token" value="{{ Session::token() }}">
             </form>
         </div>
