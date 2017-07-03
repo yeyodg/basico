@@ -31,8 +31,8 @@
 							Posted by {{$post->user1->name}} on {{$post->created_at}}
 						</div>
 						<div class="interaction">
-							<a href="#">Like</a> |
-							<a href="#">Dislike</a> 
+							<a href="#" class="like">Like</a> |
+							<a href="#" class="like">Dislike</a> 
 							@if (Auth::user() == $post->user1)
 								| 
 								<a href="#" class="edit">Edit</a> |
@@ -69,6 +69,7 @@
 	</section>
 	<script>
 		var token = '{{Session::token()}}';
-		var url = '{{route('edit')}}';
+		var urlEdit = '{{route('edit')}}';
+		var urlLike = '{{route('like')}}';
 	</script>
 @endsection

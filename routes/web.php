@@ -16,12 +16,11 @@
 
 
 Route::get('/', function () {
+	if(Auth::user()){
+		return redirect()->route('dashboard');
+	}
     return view('welcome');
 })->name('home');
-
-Route::get('/hello', function (){
-	return "Hello diego";
-})->middleware('auth')->name('hello')->middleware('auth');
 
 Route::post('/singup', 'User1Controller@postSingUp')->name('singup');
 
@@ -42,3 +41,5 @@ Route::get('/account', 'User1Controller@getAccount')->name('account');
 Route::post('/updateaccount', 'User1Controller@postSaveAccount')->name('account.save');
 
 Route::get('/userimage/{filename}', 'User1Controller@getUserImage')->name('account.image');
+
+Route::post('/like', 'PostController@postLikePost')->name('like');
