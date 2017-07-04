@@ -31,7 +31,9 @@ $('.like').on('click', function(event) {
 	event.preventDefault();
 	postId = event.target.parentNode.parentNode
 	.dataset['postid'];
-	var isLike = event.currentTarget.innerText == 'Like';
+	likes = event.target.parentNode.childNodes[3];
+	dislikes = event.target.parentNode.childNodes[7];
+	var isLike = event.currentTarget.innerText == 'Like' || event.currentTarget.innerText == 'You like this';
 	$.ajax({
 		method: 'POST',
 		url: urlLike,
@@ -42,6 +44,20 @@ $('.like').on('click', function(event) {
 		}
 	})
 	.done(function(msg){
-		console.log(msg['respuesta']);
+		console.log('Respuesta: '+msg['respuesta']+'\t'+'Likes: '+msg['post_likes']+'\t'+'Dislikes: '+msg['post_dislikes'])
+		event.target.innerText = isLike ? (event.target.innerText == 'Like' ? 'You like this' : 'Like') : (event.target.innerText == 'Dislike' ? 'You don\'t like this' : 'Dislike');
+		if(isLike){
+			event.target.nextElementSibling.nextElementSibling.innerText = 'Dislike';
+			$(likes).text(msg['post_likes']);
+			$(dislikes).text(msg['post_dislikes']);
+		}
+		else {
+			$(dislikes).text(msg['post_dislikes']);
+			$(likes).text(msg['post_likes']);
+			event.target.previousElementSibling.previousElementSibling.innerText = 'Like';
+		}
 	});
+
+
+
 });

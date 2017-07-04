@@ -43,3 +43,5 @@ Route::post('/updateaccount', 'User1Controller@postSaveAccount')->name('account.
 Route::get('/userimage/{filename}', 'User1Controller@getUserImage')->name('account.image');
 
 Route::post('/like', 'PostController@postLikePost')->name('like');
+
+Route::post('/getlikes', 'getController@getLikes')->name('get.likes');

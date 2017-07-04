@@ -31,8 +31,13 @@
 							Posted by {{$post->user1->name}} on {{$post->created_at}}
 						</div>
 						<div class="interaction">
-							<a href="#" class="like">Like</a> |
-							<a href="#" class="like">Dislike</a> 
+
+							<a href="#" class="like">{{ Auth::user()->likes()->where('post_id', $post->id)->first() ? Auth::user()->likes()->where('post_id', $post->id)->first()->like == 1 ? 'You like this' : 'Like' : 'Like'  }}</a>
+							<span class="likes">{{$post->likes}}</span>
+							
+							|
+							<a href="#" class="like">{{Auth::user()->likes()->where('post_id', $post->id)->first() ? Auth::user()->likes()->where('post_id', $post->id)->first()->like == 0 ? 'You don\'t like this' : 'Dislike' : 'Dislike'  }}</a>
+							<span class="dislikes">{{$post->dislikes}}</span>
 							@if (Auth::user() == $post->user1)
 								| 
 								<a href="#" class="edit">Edit</a> |
