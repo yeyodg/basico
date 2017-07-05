@@ -1,6 +1,7 @@
 var postId = 0;
 var postBodyElement;
 
+
 $('.post').find('.interaction').find('.edit').on('click', function(){
 	event.preventDefault();
 	postBodyElement = event.target.parentNode.parentNode

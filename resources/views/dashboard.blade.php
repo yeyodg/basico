@@ -2,12 +2,22 @@
 
 @section('content')
 	@include('includes.message-block')
+	
 	<section class="row new-post">
-		<div class="col-md-6 col-md-offset-3">
+
+		{{-- Imagen de perfil --}}
+		<div class="col-md-3">
+			<span class="pull-right">
+				<img src="{{ route('account.image', ['filename' => Auth::user()->name . '-' . Auth::user()->id . '.jpg']) }}" alt="" class="img-responsive" style="max-height: 200px;">
+			</span>
+		</div>
+
+		{{-- Publicar post --}}
+		<div class="col-md-6">
 			<header>
 				<h3>What do you have to say?</h3>
 			</header>
-			<form action="{{route('post.create')}}" method="post">
+			<form action="{{route('post.create')}}" method="post" name="nuevo">
 				<div class="form-group">
 					<textarea name="body" 
 					id="new-post" 
@@ -20,31 +30,46 @@
 			</form>
 		</div>
 	</section>
+
+
 	<section>
 		<section class="row posts">
-			<div class="col-md-6 col-md-offset-3">
+			<div class="col-md-8 col-md-offset-2">
 				<header><h3>What other people say...</h3></header>
 				@foreach ($posts as $post)
-					<article class="post" data-postid="{{ $post->id }}">
-						<p>{{$post->body}}</p>
-						<div class="info">
-							Posted by {{$post->user1->name}} on {{$post->created_at}}
-						</div>
-						<div class="interaction">
+					<div class="row">
 
-							<a href="#" class="like">{{ Auth::user()->likes()->where('post_id', $post->id)->first() ? Auth::user()->likes()->where('post_id', $post->id)->first()->like == 1 ? 'You like this' : 'Like' : 'Like'  }}</a>
-							<span class="likes">{{$post->likes}}</span>
-							
-							|
-							<a href="#" class="like">{{Auth::user()->likes()->where('post_id', $post->id)->first() ? Auth::user()->likes()->where('post_id', $post->id)->first()->like == 0 ? 'You don\'t like this' : 'Dislike' : 'Dislike'  }}</a>
-							<span class="dislikes">{{$post->dislikes}}</span>
-							@if (Auth::user() == $post->user1)
-								| 
-								<a href="#" class="edit">Edit</a> |
-								<a href="{{ route('post.delete', ['post_id' =>$post->id]) }}">Delete</a>
-							@endif
+						{{-- Imagen de perfil del post --}}
+						<div class="col-md-2">
+							<img src="{{ route('account.image', ['filename' => $post->user1->name . '-' . $post->user1->id . '.jpg']) }}" alt="" class="img-responsive" style="max-height: 100px;">
 						</div>
-					</article>
+
+						{{-- Post --}}
+						<div class="col-md-5">
+							<article class="post" data-postid="{{ $post->id }}">
+								<p>{{$post->body}}</p>
+								<div class="info">
+									Posted by {{$post->user1->name}} on {{$post->created_at}}
+								</div>
+								<div class="interaction">
+
+									<a href="#" class="like">{{ Auth::user()->likes()->where('post_id', $post->id)->first() ? Auth::user()->likes()->where('post_id', $post->id)->first()->like == 1 ? 'You like this' : 'Like' : 'Like'  }}</a>
+									<span class="likes">{{$post->likes}}</span>
+									
+									|
+									<a href="#" class="like">{{Auth::user()->likes()->where('post_id', $post->id)->first() ? Auth::user()->likes()->where('post_id', $post->id)->first()->like == 0 ? 'You don\'t like this' : 'Dislike' : 'Dislike'  }}</a>
+									<span class="dislikes">{{$post->dislikes}}</span>
+									@if (Auth::user() == $post->user1)
+										| 
+										<a href="#" class="edit">Edit</a> |
+										<a href="{{ route('post.delete', ['post_id' =>$post->id]) }}">Delete</a>
+									@endif
+								</div>
+							</article>
+						</div>
+					</div>
+					
+					
 				@endforeach
 			</div>
 		</section>
