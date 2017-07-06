@@ -8,7 +8,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="{{ route('dashboard') }}">Cara de Pollo</a>
+      <a class="navbar-brand" href="{{ route('dashboard') }}">Social Net</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
