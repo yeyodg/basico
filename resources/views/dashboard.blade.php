@@ -8,7 +8,8 @@
 		{{-- Imagen de perfil --}}
 		<div class="col-md-3">
 			<span class="pull-right">
-				<img src="{{ route('account.image', ['filename' => Auth::user()->name . '-' . Auth::user()->id . '.jpg']) }}" alt="" class="img-responsive" style="max-height: 200px;">
+				{{-- <img src="{{ route('account.image', ['filename' => Auth::user()->name . '-' . Auth::user()->id . '.jpg']) }}" alt="" class="img-responsive" style="max-height: 200px;"> --}}
+				<img src="{{Auth::user()->img}}" style="max-height: 200px;">
 			</span>
 		</div>
 
@@ -41,7 +42,8 @@
 
 						{{-- Imagen de perfil del post --}}
 						<div class="col-md-2">
-							<img src="{{ route('account.image', ['filename' => $post->user1->name . '-' . $post->user1->id . '.jpg']) }}" alt="" class="img-responsive" style="max-height: 100px;">
+{{-- 							<img src="{{ route('account.image', ['filename' => $post->user1->name . '-' . $post->user1->id . '.jpg']) }}" alt="" class="img-responsive" style="max-height: 100px;"> --}}
+							<img src="{{ $post->user1->img }}" alt="" class="img-responsive" style="max-height: 100px;">
 						</div>
 
 						{{-- Post --}}

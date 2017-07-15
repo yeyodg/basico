@@ -20,6 +20,7 @@ class CreateUser1sTable extends Migration
             $table->string('name');
             $table->string('password');
             $table->rememberToken();
+            $table->string('img')->default('https://firebasestorage.googleapis.com/v0/b/imagenes-de-perfil.appspot.com/o/silhouette-4.jpg?alt=media&token=fa5a8750-f371-43ed-9a5d-15044d9e0ce8');
         });
     }
 

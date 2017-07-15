@@ -2,6 +2,35 @@ var postId = 0;
 var postBodyElement;
 
 
+
+
+
+$('#image').on('change', function(){
+	if(this.files && this.files[0]){
+		document.getElementById('boton').setAttribute('disabled','');
+		var image = this.files[0];
+		var storageRef = firebase.storage().ref();
+		var uploadTask = storageRef.child('imagenes/' + image.name).put(image);
+		uploadTask.on('state_changed', function(snapshot){
+		  var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+		  console.log('Upload is ' + progress + '% done');
+		  switch (snapshot.state) {
+		    case firebase.storage.TaskState.PAUSED: // or 'paused'
+		      console.log('Upload is paused');
+		      break;
+		    case firebase.storage.TaskState.RUNNING: // or 'running'
+		      console.log('Upload is running');
+		      break;
+		  }
+		}, function(error) {
+		}, function() {
+		  var downloadURL = uploadTask.snapshot.downloadURL;
+			document.getElementById("url").setAttribute('value', downloadURL);
+			document.getElementById("view").setAttribute('src', downloadURL);
+			document.getElementById("boton").removeAttribute('disabled');
+		});	}
+});
+
 $('.post').find('.interaction').find('.edit').on('click', function(){
 	event.preventDefault();
 	postBodyElement = event.target.parentNode.parentNode
@@ -59,6 +88,5 @@ $('.like').on('click', function(event) {
 		}
 	});
 
-
-
 });
+

@@ -15,18 +15,17 @@
 	            </div>
 	            <div class="form-group">
 	                <label for="image">Image (only .jpg)</label>
-	                <input type="file" name="image" class="form-control" id="image">
+	                <input type="file" name="image" class="form-control" id="image" data-url="prueba">
 	            </div>
-	            <button type="submit" class="btn btn-primary">Save Account</button>
+	            <button type="submit" class="btn btn-primary" id="boton">Save Account</button>
+	            <input type="hidden" name="url" id="url">
 	            <input type="hidden" value="{{ Session::token() }}" name="_token">
 	        </form>
 	    </div>
 	</section>
-	@if (Storage::disk('local')->has($user->name . '-' . $user->id . '.jpg'))
-	    <section class="row new-post">
-	        <div class="col-md-6 col-md-offset-3">
-	            <img src="{{ route('account.image', ['filename' => $user->name . '-' . $user->id . '.jpg']) }}" alt="" class="img-responsive">
-	        </div>
-	    </section>
-	@endif
+    <section class="row new-post">
+        <div class="col-md-6 col-md-offset-3">
+            <img src="{{Auth::user()->img}}" alt="" id="view" class="img-responsive">
+        </div>
+    </section>
 @endsection
